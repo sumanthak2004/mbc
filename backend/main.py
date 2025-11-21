@@ -28,14 +28,14 @@ from schemas import (
 
 app = FastAPI()
 
-# Temporary: allow all origins during development while we debug preflight issues.
-# Replace with a specific origin like "http://localhost:5173" when finished.
-origins = ["*"]
+# Allow CORS from all origins (for development)
+# Note: allow_credentials=True cannot be used with allow_origins=["*"]
+# So we remove allow_credentials or list specific origins
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
